@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model KnowledgeSharing.Models.EmployeeVM
+<style type="text/css">
+    body {
+        font-family: Arial;
+        font-size: 10pt;
+    }
+
+    .Grid {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        margin-top: 100px;
+    }
+
+        .Grid th {
+            background-color: #F7F7F7;
+            font-weight: bold;
+        }
+
+        .Grid th, .Grid td {
+            padding: 5px;
+            border: 1px solid #ccc;
+            width: 236px;
+        }
+
+        .Grid, .Grid table td {
+            border: 0px solid #ccc;
+        }
+
+            .Grid th a, .Grid th a:visited {
+                color: #333;
+            }
+</style>
+@using (Html.BeginForm("GetEmployees", "Home", FormMethod.Post))
+{
+
+    <div class="row">
+        <h1>Employees Report With Jquery</h1>
+        <button type="submit" value="Load Employees"> Load Employees</button>
+
+    </div>
+
+    if(Model.Employees.Count > 0) { 
+    WebGrid objWebGrid = new WebGrid(Model.Employees);
+    @objWebGrid.GetHtml(htmlAttributes: new { @id = "WebGrid", @class = "Grid" })
+    }
+}
+
+
+
+<div>
+    <h2>Country Name</h2>
+
+    @Html.Action("Countries", new { CountryNames = new List<string>() { "US", "UK", "INDIA", "CHINA" } });
+</div>

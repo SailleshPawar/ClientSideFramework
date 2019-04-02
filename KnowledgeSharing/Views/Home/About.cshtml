@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<style>
+    .hidden{
+        display:none
+    }
+</style>
+<div>
+    <h1> Employee Report With Data Table.js</h1>
+
+    <table id="grid-employees" class="hidden table table-bordered table-hover ">
+        <thead>
+            <tr>
+                <th>Age</th>
+                <th>EmCode</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Profile</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <button type="button" id="btnLoadEmployees" value="Load Employees"> Load Employees</button>
+
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#btnLoadEmployees").click(function () {
+              
+                $("#grid-employees").DataTable({
+                    ajax: {
+                        url: "/home/GetEmployeeÀPI",
+                        dataSrc: "",
+                        dataType:"json"
+                    },
+                    "bDestroy": true,
+                    columns: [
+                        {
+                            data: "Age",
+                            
+                        },
+                        {
+                            data: "EmCode"
+                        },
+                        {
+                            data: "FirstName"
+                        },
+                        {
+                            data: "LastName"
+                        },
+                        {
+                            data: "Profile"
+                        },
+                    ]
+                });
+                 $("#grid-employees").removeClass("hidden");
+            });
+           
+          
+        });
+    </script>
+}
